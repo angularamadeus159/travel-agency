@@ -1,0 +1,58 @@
+<div class="send-emails-container">
+  <header class="page-header">
+    <h1>Enviar Correos a Agencias</h1>
+    <p>Envía información de reservas por email a las agencias</p>
+  </header>
+
+  <div class="email-form">
+    <div class="form-group">
+      <label for="agency">Seleccionar Agencia</label>
+      <select 
+        id="agency" 
+        [(ngModel)]="selectedAgency"
+        class="form-control"
+      >
+        <option value="">-- Selecciona una agencia --</option>
+        @for (agency of agencies(); track agency.email) {
+          <option [value]="agency.email">{{ agency.name }} ({{ agency.email }})</option>
+        }
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="subject">Asunto</label>
+      <input 
+        type="text" 
+        id="subject"
+        [(ngModel)]="emailSubject"
+        class="form-control"
+        placeholder="Reservas del mes de enero 2026"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="body">Mensaje</label>
+      <textarea 
+        id="body"
+        [(ngModel)]="emailBody"
+        class="form-control"
+        rows="10"
+        placeholder="Estimados,&#10;&#10;Adjunto encontrarán el listado de reservas correspondiente..."
+      ></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button 
+        class="btn btn-primary"
+        (click)="sendEmail()"
+        [disabled]="isLoading() || !selectedAgency() || !emailSubject() || !emailBody()"
+      >
+        @if (isLoading()) {
+          <span>Enviando...</span>
+        } @else {
+          <span>📧 Enviar Email</span>
+        }
+      </button>
+    </div>
+  </div>
+</div>

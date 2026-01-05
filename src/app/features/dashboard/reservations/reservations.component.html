@@ -1,0 +1,88 @@
+<div class="reservations-container">
+  <div class="page-header">
+    <h1>Gestión de Reservas</h1>
+    <p>Filtra y envía información de reservas por agencia</p>
+  </div>
+
+  <div class="filters-section">
+    <div class="filter-group">
+      <label for="agency-select">Seleccionar Agencia:</label>
+      <select
+        id="agency-select"
+        [(ngModel)]="selectedAgency"
+        (ngModelChange)="onAgencyChange()"
+        class="form-select"
+      >
+        <option value="">Todas las agencias</option>
+        @for (agency of agencies(); track agency.name) {
+          <option [value]="agency.name">{{ agency.name }}</option>
+        }
+      </select>
+    </div>
+
+    @if (selectedAgency()) {
+      <button class="btn btn-primary" (click)="sendEmail()" [disabled]="isLoading()">
+        @if (isLoading()) {
+          <span class="spinner"></span>
+          Enviando...
+        } @else {
+          ✉️ Enviar Correo a {{ selectedAgency() }}
+        }
+      </button>
+    }
+  </div>
+
+  @if (errorMessage()) {
+    <div class="alert alert-error">
+      {{ errorMessage() }}
+    </div>
+  }
+
+  @if (isLoading() && reservations().length === 0) {
+    <div class="loading-state">
+      <div class="spinner-large"></div>
+      <p>Cargando reservas...</p>
+    </div>
+  } @else if (filteredReservations().length === 0) {
+    <div class="empty-state">
+      <p>No se encontraron reservas</p>
+    </div>
+  } @else {
+    <div class="table-container">
+      <table class="reservations-table">
+        <thead>
+          <tr>
+            <th>N° Reserva</th>
+            <th>Agencia</th>
+            <th>Cliente</th>
+            <th>Fecha Viaje</th>
+            <th>Cuota Octubre</th>
+            <th>Saldo Mes Actual</th>
+            <th>Fecha Pago</th>
+            <th>Saldo a la Fecha</th>
+            <th>Observaciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (reservation of filteredReservations(); track reservation.id) {
+            <tr>
+              <td>{{ reservation.reservationNumber }}</td>
+              <td>{{ reservation.agencyName }}</td>
+              <td>{{ reservation.clientName }}</td>
+              <td>{{ formatDate(reservation.travelDate) }}</td>
+              <td>{{ formatCurrency(reservation.octoberQuota) }}</td>
+              <td>{{ formatCurrency(reservation.currentMonthBalance) }}</td>
+              <td>{{ formatDate(reservation.paymentDate) }}</td>
+              <td>{{ formatCurrency(reservation.balanceToDate) }}</td>
+              <td>{{ reservation.observations }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-footer">
+      <p>Total de reservas: {{ filteredReservations().length }}</p>
+    </div>
+  }
+</div>
