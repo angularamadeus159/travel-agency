@@ -8,22 +8,10 @@
     </div>
 
     <nav class="sidebar-nav">
-      <a routerLink="/dashboard/reservations" routerLinkActive="active" class="nav-item">
-        <span class="icon">📋</span>
-        @if (isSidebarOpen()) {
-          <span>Reservas</span>
-        }
-      </a>
       <a routerLink="/dashboard/upload" routerLinkActive="active" class="nav-item">
         <span class="icon">📤</span>
         @if (isSidebarOpen()) {
           <span>Cargar Excel</span>
-        }
-      </a>
-      <a routerLink="/dashboard/emails" routerLinkActive="active" class="nav-item">
-        <span class="icon">✉️</span>
-        @if (isSidebarOpen()) {
-          <span>Enviar Correos</span>
         }
       </a>
     </nav>

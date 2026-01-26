@@ -32,15 +32,8 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'reservations',
+        redirectTo: 'upload',
         pathMatch: 'full'
-      },
-      {
-        path: 'reservations',
-        loadComponent: () =>
-          import('./features/dashboard/reservations/reservations.component').then(
-            (m) => m.ReservationsComponent
-          )
       },
       {
         path: 'upload',
@@ -49,13 +42,6 @@ export const routes: Routes = [
             (m) => m.UploadExcelComponent
           )
       },
-      {
-        path: 'emails',
-        loadComponent: () =>
-          import('./features/dashboard/send-emails/send-emails.component').then(
-            (m) => m.SendEmailsComponent
-          )
-      }
     ]
   },
   {

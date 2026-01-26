@@ -140,21 +140,50 @@
   }
 }
 
-.table-container {
+// Wrapper para scroll horizontal
+.table-wrapper {
   background: white;
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
+.table-container {
+  overflow-x: auto;
+  overflow-y: visible;
+  
+  // Estilos para la barra de scroll
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 0 0 12px 12px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 4px;
+    
+    &:hover {
+      background: #a0aec0;
+    }
+  }
+}
+
 .reservations-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
+  min-width: 1200px; // Ancho m\u00ednimo para forzar scroll horizontal
 
   thead {
     background-color: #f7fafc;
     border-bottom: 2px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 
     th {
       padding: 1rem;
@@ -182,21 +211,118 @@
     td {
       padding: 1rem;
       color: #4a5568;
+      white-space: nowrap;
     }
   }
 }
 
 .table-footer {
   background: white;
-  padding: 1rem 1.5rem;
-  border-radius: 0 0 12px 12px;
+  padding: 1.5rem;
   border-top: 1px solid #e2e8f0;
-  margin-top: -1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 
-  p {
-    margin: 0;
-    color: #718096;
+  .footer-info {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    
+    p {
+      margin: 0;
+      color: #718096;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+  }
+}
+
+// Estilos de paginaci\u00f3n
+.pagination {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+    .btn-load-excel {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    color: white;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-right: 1rem;
+    
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
+    }
+  }
+  
+  .btn-send-email {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+    
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+    
+    .spinner {
+      width: 1rem;
+      height: 1rem;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+  }
+    .pagination-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #e2e8f0;
+    background: white;
+    color: #4a5568;
+    border-radius: 6px;
     font-size: 0.875rem;
     font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    
+    &:hover:not(:disabled):not(.active) {
+      border-color: #667eea;
+      color: #667eea;
+      background-color: #f7fafc;
+    }
+    
+    &.active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-color: transparent;
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 }

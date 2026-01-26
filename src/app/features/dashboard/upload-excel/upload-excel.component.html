@@ -1,10 +1,11 @@
 <div class="upload-container">
-  <div class="page-header">
-    <h1>Cargar Archivo Excel</h1>
-    <p>Importa reservas desde Google Drive</p>
-  </div>
+  @if (!showTableView()) {
+    <div class="page-header">
+      <h1>Cargar Archivo Excel</h1>
+      <p>Importa reservas desde Google Drive</p>
+    </div>
 
-  <div class="upload-card">
+    <div class="upload-card">
     <div class="upload-instructions">
       <h3>📋 Instrucciones</h3>
       <ul>
@@ -79,4 +80,20 @@
       }
     </div>
   </div>
+  }
+
+  @if (showTableView() && reservations().length > 0) {
+    <div class="reservations-section">
+      <div class="section-header">
+        <h2>Reservas Cargadas</h2>
+        <p>Total: {{ reservations().length }} reservas</p>
+      </div>
+
+      <app-reservations 
+        [externalReservations]="reservations"
+        [showLoadExcelButton]="showExcelButton"
+        [onLoadExcelClick]="showUploadArea.bind(this)"
+      />
+    </div>
+  }
 </div>

@@ -1,17 +1,13 @@
 export interface Reservation {
-  id: string;
   reservationNumber: string;
-  agencyName: string;
-  agencyEmail: string;
   clientName: string;
-  travelDate: Date;
-  octoberQuota: number;
-  currentMonthBalance: number;
-  paymentDate: Date;
-  balanceToDate: number;
-  observations: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  travelDate: string | null;
+  observation: string | null;
+  paymentDate: string | null;
+  lastPaymentDate: string | null;
+  quotaMonth: string | null;
+  quotaBalance: string | null;
+  agencyEmail: string | null;
 }
 
 export interface ReservationFilters {
@@ -33,4 +29,10 @@ export interface EmailPayload {
   to: string;
   agencyName: string;
   reservations: Reservation[];
+}
+
+export interface ResponseDTO<T = any> {
+  success: boolean;
+  message: string;
+  data: T;
 }

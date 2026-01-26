@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EmailPayload, Reservation, ReservationFilters } from '../models';
+import { EmailPayload, Reservation, ReservationFilters, ResponseDTO } from '../models';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -18,8 +18,8 @@ export class ReservationService {
     return this.apiService.get<Reservation>(`/reservations/${id}`);
   }
 
-  uploadExcelFile(file: File): Observable<{ message: string; count: number }> {
-    return this.apiService.upload<{ message: string; count: number }>(
+  uploadExcelFile(file: File): Observable<ResponseDTO<Reservation[]>> {
+    return this.apiService.upload<ResponseDTO<Reservation[]>>(
       '/reservations/upload',
       file
     );
@@ -27,6 +27,10 @@ export class ReservationService {
 
   sendEmailToAgency(payload: EmailPayload): Observable<{ message: string }> {
     return this.apiService.post<{ message: string }>('/reservations/send-email', payload);
+  }
+  
+  sendEmailToClient(payload: { clientName: string; reservations: Reservation[] }): Observable<any> {
+    return this.apiService.post('/reservations/send-email-client', payload);
   }
 
   getAgencies(): Observable<{ name: string; email: string }[]> {
