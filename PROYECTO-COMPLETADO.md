@@ -360,4 +360,3 @@ El dashboard está listo para ser utilizado una vez que implementes el backend s
 
 ---
 
-Desarrollado con ❤️ para On Vacation
