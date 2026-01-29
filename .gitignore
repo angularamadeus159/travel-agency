@@ -42,7 +42,6 @@ __screenshots__/
 .DS_Store
 Thumbs.db
 
-# Environment files (IMPORTANTE: No subir claves sensibles)
-src/environments/environment.ts
+# Environment files locales (solo ignorar el de desarrollo)
 src/environments/environment.development.ts
-# El environment.prod.ts puede subirse si usas variables de entorno de Vercel
+# Nota: environment.ts y environment.prod.ts SÍ se suben al repo
