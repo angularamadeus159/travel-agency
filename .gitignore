@@ -41,4 +41,8 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
-src/environments/*
+
+# Environment files (IMPORTANTE: No subir claves sensibles)
+src/environments/environment.ts
+src/environments/environment.development.ts
+# El environment.prod.ts puede subirse si usas variables de entorno de Vercel

@@ -1,6 +1,6 @@
 export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:8080/api',
+  production: true,
+  apiUrl: 'https://tu-backend.herokuapp.com/api', // O la URL de tu backend en producción
   supabaseUrl: 'https://nfyufytfpqhivuievnqc.supabase.co',
   supabaseKey: 'sb_publishable_RMKatkEOo5iPSiGOZlJYyQ_tIpfVtp5'
 };
