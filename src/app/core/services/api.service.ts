@@ -18,13 +18,13 @@ export class ApiService {
     return this.http.post<T>(`${this.baseUrl}${endpoint}`, data, { headers });
   }
 
-  put<T>(endpoint: string, data: any): Observable<T> {
-    return this.http.put<T>(`${this.baseUrl}${endpoint}`, data);
-  }
+  // put<T>(endpoint: string, data: any): Observable<T> {
+  //   return this.http.put<T>(`${this.baseUrl}${endpoint}`, data);
+  // }
 
-  delete<T>(endpoint: string): Observable<T> {
-    return this.http.delete<T>(`${this.baseUrl}${endpoint}`);
-  }
+  // delete<T>(endpoint: string): Observable<T> {
+  //   return this.http.delete<T>(`${this.baseUrl}${endpoint}`);
+  // }
 
   upload<T>(endpoint: string, file: File): Observable<T> {
     const formData = new FormData();
