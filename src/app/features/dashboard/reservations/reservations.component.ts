@@ -26,6 +26,9 @@ export class ReservationsComponent implements OnInit {
   protected readonly selectedClient = signal<string>('');
   protected readonly isLoading = signal(false);
   protected readonly errorMessage = signal<string | null>(null);
+  protected readonly currentMonth = signal(
+  new Date().toLocaleString('es-ES', { month: 'long' }).replace(/^\w/, (c) => c.toUpperCase()));
+  
   
   // Computed signal para obtener lista única de clientes
   protected readonly clients = computed(() => {
@@ -121,17 +124,18 @@ export class ReservationsComponent implements OnInit {
   }
 
   /**
-   * Convierte string dd/MM/yyyy a Date para usar con pipe date de Angular
+   * Convierte string MM/dd/yyyy a Date para usar con pipe date de Angular
+   * El backend envía fechas en formato americano: MM/dd/yyyy
    */
   formatDate(dateStr: string | null): Date | null {
     if (!dateStr) return null;
     
-    // Parsear string dd/MM/yyyy a Date
+    // Parsear string MM/dd/yyyy a Date (formato americano)
     const parts = dateStr.split('/');
     if (parts.length === 3) {
-      const day = parseInt(parts[0], 10);
-      const month = parseInt(parts[1], 10);
-      const year = parseInt(parts[2], 10);
+      const month = parseInt(parts[0], 10);  // Primer valor es el mes
+      const day = parseInt(parts[1], 10);    // Segundo valor es el día
+      const year = parseInt(parts[2], 10);   // Tercer valor es el año
       
       if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
         // Crear Date (mes es 0-indexed en JavaScript)

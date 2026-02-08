@@ -1,6 +1,8 @@
 export interface Reservation {
   reservationNumber: string;
   clientName: string;
+  pax: number | null;
+  destination: string | null;
   travelDate: string | null;
   observation: string | null;
   paymentDate: string | null;

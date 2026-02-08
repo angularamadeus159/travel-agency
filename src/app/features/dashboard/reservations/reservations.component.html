@@ -45,12 +45,14 @@
               <th>N° Reserva</th>
               <th>Cliente</th>
               <th>Fecha Viaje</th>
-              <th>Cuota Mes</th>
-              <th>Saldo</th>
-              <th>Fecha Pago</th>
-              <th>Email Agencia</th>
+              <th>Cuota de {{ currentMonth() }}</th>
+              <th>Fecha Pago de {{ currentMonth() }}</th>
+              <th>Saldo Pendiente del abono</th>
               <th>Observaciones</th>
+              <th>Destino</th>
+              <th>Cantidad Pax</th>
               <th>Fecha ultimo pago</th>
+              <th>Email Agencia</th>
             </tr>
           </thead>
           <tbody>
@@ -58,13 +60,15 @@
               <tr>
                 <td>{{ reservation.reservationNumber }}</td>
                 <td>{{ reservation.clientName }}</td>
-                <td>{{ formatDate(reservation.travelDate) | date: 'M/d/yyyy' }}</td>
+                <td>{{ formatDate(reservation.travelDate) | date: 'MM/dd/yyyy' }}</td>
                 <td>{{ formatCurrency(reservation.quotaMonth) }}</td>
+                <td>{{ formatDate(reservation.paymentDate) | date: 'MM/dd/yyyy' }}</td>
                 <td>{{ formatCurrency(reservation.quotaBalance) }}</td>
-                <td>{{ formatDate(reservation.paymentDate) | date: 'M/d/yyyy' }}</td>
-                <td>{{ reservation.agencyEmail || '-' }}</td>
                 <td>{{ reservation.observation || '-' }}</td>
-                <td>{{ formatDate(reservation.lastPaymentDate) | date: 'M/d/yyyy' }}</td>
+                <td>{{ reservation.destination || '-' }}</td>
+                <td>{{ reservation.pax || '-' }}</td>
+                <td>{{ formatDate(reservation.lastPaymentDate) | date: 'MM/dd/yyyy' }}</td>
+                <td>{{ reservation.agencyEmail || '-' }}</td>
               </tr>
             }
           </tbody>
